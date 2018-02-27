@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Button, Picker } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, Picker, Slider } from 'react-native';
 
 
 
@@ -8,7 +8,8 @@ export default class App extends React.Component {
         super();
         this.state = {
             visible: true,
-            term: "none chosen"
+            term: "none chosen",
+            like: 0
         };
     }
 
@@ -44,7 +45,21 @@ export default class App extends React.Component {
                         <Picker.Item label="Chocolate Starfish" value="comedy" />
                         <Picker.Item label="Ringpiece" value="vernacular" />
                 </Picker>
+                <Text>This bum word is:</Text>
                 <Text style={styles.header}>{this.state.term}</Text>
+                <Text>How much do you like this bum-word?</Text>
+                <Slider
+                    style={{width: 300}}
+                    maximumValue={100}
+                    minimumValue={0}
+                    onValueChange={(value)=> this.setState({like: value})}
+                />
+                <Text
+                    style={styles.header}
+                >
+                    {Math.round(this.state.like)}% 
+                </Text>
+
             </View>
         );
     }
