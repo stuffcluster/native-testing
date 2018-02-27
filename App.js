@@ -1,19 +1,35 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, Button } from 'react-native';
 
 
 
 export default class App extends React.Component {
-  render() {
-      let pic = {
-        uri: 'http://finedininglovers.cdn.crosscast-system.com/BlogPost/l_12787_rainbow-corn-.jpg' };
-    return (
-        <View style={styles.container}>
-            <Image source={pic} style={{width: 300, height: 210}}/>
-            <Text>STUFFCLUSTER</Text>
-        </View>
-    );
-  }
+    constructor(){
+        super();
+        this.state = {visible: true};
+    }
+
+    toggleVisibility=()=> {
+        this.setState(prevState => {
+            return {visible: !prevState.visible}
+        });
+    }
+
+    render() {
+    let pic = {uri: 'http://finedininglovers.cdn.crosscast-system.com/BlogPost/l_12787_rainbow-corn-.jpg'};
+        return (
+            <View style={styles.container}>
+                {this.state.visible ? 
+                    <Image source={pic} style={{width: 300, height: 210}}/>
+                    :
+                    null}
+                <Button 
+                    title="toggle image"
+                    onPress={this.toggleVisibility}
+                />
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
